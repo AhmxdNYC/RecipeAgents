@@ -4,6 +4,7 @@ RecipeAgents is a personalized recipe recommendation system that generates tailo
 
 ## Table of Contents
 
+- [Architecture](#architecture)
 - [Agents](#agents)
   - [User Input Agent](#1-user-input-agent)
   - [Recipe Fetching Agent](#2-recipe-fetching-agent)
@@ -19,7 +20,13 @@ RecipeAgents is a personalized recipe recommendation system that generates tailo
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
+## architecture
+
+![Diagram](./website//public/diagram.png "Diagram")
+
 ## Agents
+
+- out of date
 
 ### 1. User Input Agent
 
