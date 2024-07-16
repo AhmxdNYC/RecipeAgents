@@ -8,7 +8,7 @@ load_dotenv()
 from .prompts import GRADER_PROMPT
 
 def grader_node(state, use_saved_data: bool = False):
-    from graph import model  # Import here to avoid circular import
+    from graph import model  # avoid circular import
 
     directory = os.environ.get("GENERATED_DATA_DIR", "../tests/relevant_docs_save")
     filename = os.path.join(directory, "relevant_content.json")
@@ -35,24 +35,16 @@ def grader_node(state, use_saved_data: bool = False):
     # Split the response content by delimiter
     relevant_content = response.content.split('-----')
     
-    # Ensure the relevant content is meaningful
+    # store the relevant content
     relevant_content = [doc.strip() for doc in relevant_content if len(doc.strip()) > 20]
     
-    # If insufficient relevant content, trigger re-research
-    # print("content", content)
-    # print('-------------------')
-    # print("relevant_content", relevant_content)
     print('-------------------')
     print(len(state['content']), len(relevant_content))
     
-    # Calculate the grading score as the percentage of relevant documents
+    # Calculate the grading score as the percentage of relevant documents / total documents
     relevant_count = len(relevant_content)
     total_count = len(state['content'])
     grading_score = (relevant_count / total_count) * 100 if total_count > 0 else 0
-
-    # # Update state with the new grading score
-    # state['grading_score'] = round(grading_score)
-    # state['content'] = relevant_content
     
     # Saving
     with open(filename, 'w') as file:

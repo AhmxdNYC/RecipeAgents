@@ -9,7 +9,7 @@ load_dotenv()
 from .prompts import HALLUCINATION_GRADER_PROMPT
 
 def reviewer_node(state, use_saved_data: bool = False):
-    from graph import model  # Import here to avoid circular import
+    from graph import model  # avoid circular import
 
     directory = os.environ.get("REVIEW_DATA_DIR", "../tests/review_save")
     filename = os.path.join(directory, "review_results.json")
@@ -54,7 +54,7 @@ def reviewer_node(state, use_saved_data: bool = False):
             "generated": state['generated'],
             "review": assessments,
             "hellucination_score": hellucination_score,
-            "grading_score": state['grading_score']  # Add grading score to saved data
+            "grading_score": state['grading_score'] 
         }, file)
     print(hellucination_score)
     
@@ -68,4 +68,4 @@ def reviewer_node(state, use_saved_data: bool = False):
 
 # Test
 if __name__ == "__main__":
-    from graph import AgentState  # Import here to avoid circular import
+    from graph import AgentState  # avoid circular import

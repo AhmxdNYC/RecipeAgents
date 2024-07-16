@@ -18,8 +18,8 @@ const ChatMessage = ({ message }: { message: Message }) => {
           message.sender === "user"
             ? "bg-blue-500 text-white"
             : "bg-gray-300 text-gray-700"
-        } p-4 rounded-lg max-w-lg`} // Increased padding and max-width
-        dangerouslySetInnerHTML={{ __html: formattedText }} // Render formatted text with line breaks
+        } p-4 rounded-lg max-w-lg`}
+        dangerouslySetInnerHTML={{ __html: formattedText }}
       />
     </div>
   )

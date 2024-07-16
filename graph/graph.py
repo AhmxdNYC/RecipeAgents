@@ -4,10 +4,10 @@ import os
 from graph.agents import get_plan_node, get_research_plan_node, get_grader_node, get_generator_node, get_reviewer_node
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
-from graph import AgentState  # Import here to avoid circular import
+from graph import AgentState  # avoid circular import
 
 def send_data_to_server(data):
-    print("Sending data to server:", data)  # Debug print
+    print("Sending data to server:", data) 
     response = requests.post('http://127.0.0.1:5000/api/processed', json=data)
     if response.status_code == 200:
         print("Processed data sent successfully:", response.json())
@@ -15,7 +15,7 @@ def send_data_to_server(data):
         print("Error sending processed data:", response.status_code, response.text)
 
 def process_user_input(user_input):
-    print("Starting process_user_input with:", user_input)  # Debug print
+    print("Starting process_user_input with:", user_input)  
     planner = get_plan_node()
     researcher = get_research_plan_node()
     grader = get_grader_node()
@@ -56,27 +56,29 @@ def process_user_input(user_input):
     thread = {"configurable": {"thread_id": "1"}}
 
     # Process the user input
-    processed_result = f"Processed: {user_input}"  # Example processing
+    processed_result = f"Processed: {user_input}"  
     print("Processed result:", processed_result)
 
     state = AgentState(
         task=processed_result,
         plan="",
-        generated="Generated example text",  # Example generated text
+        generated="", 
         content=[],
         grading_score=0, 
         revision_number=0, 
         final_review="",
         hellucination_score=0,  
         search_number=0,
-        max_searches=1,
-        max_revisions=1,
+        max_searches=1, # Adjust (1-2 recommendeded)
+        max_revisions=1, # Adjust (1-2 recommendeded)
     )
 
     # Start the Graph
     for event in graph.stream(state, thread):
         print('------------------')
-        print('------------------')
+        # for key, value in event.items():
+        #     print(key, value)
+        # print('------------------')
 
     # Retrieve the review data from the file
     directory = os.environ.get("REVIEW_DATA_DIR", "../tests/review_save")
@@ -96,10 +98,10 @@ def process_user_input(user_input):
     send_data_to_server(data_to_send)
 
     # Return the processed result
-    return data_to_send  # Return the actual data to be sent
+    return data_to_send  
 
 if __name__ == "__main__":
-    # Example hardcoded input for standalone testing
+    # standalone Testing
     user_input = "I want to eat healthy and lose weight but I like eating out often, especially Chinese and Jamaican food. I have a preference for American food and I'm allergic to nuts and peaches."
     result = process_user_input(user_input)
     print(result)

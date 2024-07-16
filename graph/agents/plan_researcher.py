@@ -8,7 +8,7 @@ load_dotenv()
 from .prompts import RESEARCH_PROMPT
 
 def research_plan_node(state, use_saved_data: bool = False):
-    from graph import AgentState, model, Queries, tavily  # Import here to avoid circular import
+    from graph import AgentState, model, Queries, tavily  # avoid circular import
 
     directory = os.environ.get("DOCUMENTS_DATA_DIR", "../tests/documents_save")
     filename = os.path.join(directory, "documents.json")
@@ -31,6 +31,7 @@ def research_plan_node(state, use_saved_data: bool = False):
     print(queries)
 
     # Check if content is a string and convert it to a list if necessary
+    # during recurses, content can become a string
     if isinstance(state['content'], str):
         content = [state['content']]
     else:
@@ -46,6 +47,7 @@ def research_plan_node(state, use_saved_data: bool = False):
         json.dump({"content": content}, file) 
         
     # return combo of original content and new content
+    
     state['search_number'] += 1
     print("-----RESEARCHER------")
     return {"content": content}

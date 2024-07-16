@@ -7,7 +7,7 @@ load_dotenv()
 
 from .prompts import PLAN_PROMPT
 def plan_node(state, use_saved_data: bool = False):
-    from graph import AgentState , model
+    from graph import AgentState , model # avoid circular import
     directory = os.environ.get("PLANNER_DATA_DIR", "../tests/plan_save")
     filename = os.path.join(directory, "plan_data.json")
     
@@ -32,6 +32,7 @@ def plan_node(state, use_saved_data: bool = False):
         json.dump({"plan": response.content}, file)
 
     return {"plan": response.content}
+
 # Test
 # if __name__ == "__main__":
 #     from graph import AgentState  # Import here to avoid circular import

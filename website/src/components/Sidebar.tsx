@@ -12,7 +12,9 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64 bg-gray-800 text-white flex flex-col p-4">
-      <h2 className="text-2xl font-bold mb-4">Threads</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        Threads not fully implemented yet
+      </h2>
       <ul>
         {threads.map((thread, index) => (
           <li

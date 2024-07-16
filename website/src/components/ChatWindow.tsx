@@ -16,23 +16,22 @@ const ChatWindow = () => {
     e.preventDefault()
     if (input.trim() !== "") {
       const newMessageId = Date.now()
-      // Add the user's message to the state
+      // Add the user message to the state
       setMessages([
         ...messages,
         { id: newMessageId, text: input, sender: "user" },
       ])
       console.log("User input:", input)
-
+      setInput("")
       try {
-        // Send the user's input to the server
+        // Send the user input to the server
         const response = await axios.post("http://127.0.0.1:5000/api/data", {
           text: input,
         })
 
-        // Log the server response
         console.log("Server response:", response.data)
 
-        // Retrieve the modified text from the server's response
+        // Retrieve response from Agent Graph
         const { generated, grading_score, hellucination_score } = response.data
         const botMessageId = newMessageId + 1
 
@@ -48,9 +47,6 @@ const ChatWindow = () => {
       } catch (error) {
         console.error("Error sending data", error)
       }
-
-      // Clear the input field
-      setInput("")
     }
   }
 
@@ -60,11 +56,7 @@ const ChatWindow = () => {
 
   return (
     <div className="flex flex-col h-full max-w-6xl mx-auto">
-      {" "}
-      {/* Adjust the width here */}
       <div className="flex-grow overflow-auto p-6">
-        {" "}
-        {/* Increased padding */}
         {messages.map((message) => (
           <ChatMessage
             key={message.id}
@@ -80,11 +72,11 @@ const ChatWindow = () => {
           value={input}
           onChange={handleChange}
           placeholder="Type your message here..."
-          className="w-full h-32 p-3 border rounded-md resize-none" // Adjusted the height and padding
+          className="w-full h-32 p-3 border rounded-md resize-none"
         />
         <button
           type="submit"
-          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 mt-2" // Increased padding and margin
+          className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 mt-2"
         >
           Send
         </button>

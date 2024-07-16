@@ -8,13 +8,12 @@ load_dotenv()
 from .prompts import GENERATOR_PROMPT
 
 def generator_node(state, use_saved_data: bool = False):
-    from graph import model  # Import here to avoid circular import
+    from graph import model  # avoid circular import
 
     # Directory to save/load generated content
     directory = os.environ.get("GENERATED_DATA_DIR", "../tests/meal_plan_save")
     filename = os.path.join(directory, "generated.json")
     
-    # Create the directory if it doesn't exist
     if not os.path.exists(directory):
         os.makedirs(directory)
     
@@ -39,7 +38,6 @@ def generator_node(state, use_saved_data: bool = False):
     
     response = model.invoke(messages)
     print("-------------------")
-    # print("Generated response:", response.content)
     
     # Save the generated response
     with open(filename, 'w') as file:
@@ -54,7 +52,7 @@ def generator_node(state, use_saved_data: bool = False):
     
 # Test
 # if __name__ == "__main__":
-#     from graph import AgentState  # Import here to avoid circular import
+#     from graph import AgentState  # avoid circular import
 
 #     state: AgentState = {
 #         "task": "I want to eat healthy and lose weight but I like pizza and donuts. I have a preference for greasy meals and I'm allergic to nuts and bananas.",
