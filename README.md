@@ -151,15 +151,10 @@ def reviewer_node(state, use_saved_data: bool = False):
 
 2. Install the required dependencies:
 
-- double check this
-  ```sh
-   # Run from root directory
-   npm run install:all
-  ```
-
-3. Set up your Tavily API key:
-
-- Replace `YOUR_WAVILY_API_KEY` with your actual Tavily API key in the `RecipeFetchingAgent` class.
+```sh
+ # Run from root directory
+ npm run install:all
+```
 
 ## Usage
 
@@ -183,6 +178,7 @@ npm run start:all
 ## Project Structure
 
 - Agents folder: contains implementation of all agents.
+- Tests folder: contains saved data run through test pre graph initialization.
 
 - Workflow folder: contains implementation of workflow.
 
