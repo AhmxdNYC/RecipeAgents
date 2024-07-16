@@ -1,14 +1,13 @@
 import json
 import os
 from dotenv import load_dotenv
-from graph import AgentState , model
 from langchain_core.messages import SystemMessage, HumanMessage
 
 load_dotenv()
 
-from prompts import PLAN_PROMPT
-
-def plan_node(state: AgentState, use_saved_data: bool = True):
+from .prompts import PLAN_PROMPT
+def plan_node(state, use_saved_data: bool = False):
+    from graph import AgentState , model
     directory = os.environ.get("PLANNER_DATA_DIR", "../tests/plan_save")
     filename = os.path.join(directory, "plan_data.json")
     
@@ -33,15 +32,17 @@ def plan_node(state: AgentState, use_saved_data: bool = True):
         json.dump({"plan": response.content}, file)
 
     return {"plan": response.content}
-
 # Test
-state = AgentState(
-    task="I want to eat healthy and lose weight but I like pizza and donuts. I have a preference for greasy meals and I'm allergic to nuts and bananas.",
-    plan="", 
-    generated="", 
-    content=[], 
-    revision_number=0, 
-    max_revisions=2
-)
+# if __name__ == "__main__":
+#     from graph import AgentState  # Import here to avoid circular import
 
-print(plan_node(state, use_saved_data=True))
+#     state = AgentState(
+#         task="I want to eat healthy and lose weight but I like pizza and donuts. I have a preference for greasy meals and I'm allergic to nuts and bananas.",
+#         plan="", 
+#         generated="", 
+#         content=[], 
+#         revision_number=0, 
+#         max_revisions=2
+#     )
+
+#     print(plan_node(state, use_saved_data=True))

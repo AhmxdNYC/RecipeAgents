@@ -11,5 +11,10 @@ class AgentState(TypedDict):
     plan: str
     generated: str
     content: List[str]
+    grading_score: int
+    final_review: str
+    hellucination_score: int
+    search_number: int
+    max_searches: int
     revision_number: int
     max_revisions: int
