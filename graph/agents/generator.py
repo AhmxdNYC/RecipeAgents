@@ -44,6 +44,7 @@ def generator_node(state, use_saved_data: bool = False):
     # Save the generated response
     with open(filename, 'w') as file:
         json.dump({"generated": response.content}, file)
+    state['generated'] = response.content
     
     print("-----GENERATORRRR------")
     return {
