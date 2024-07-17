@@ -154,6 +154,8 @@ def reviewer_node(state, use_saved_data: bool = False):
 ```sh
  # Run from root directory
  npm run install:all
+ # For Python
+ pip install -r requirements.txt
 ```
 
 ## Usage
@@ -168,7 +170,17 @@ TAVILY_API_KEY=XXXXXXXXXX
 OPENAI_API_KEY=XXXXXXXXXX
 ```
 
-1. Run flask server and frontend at once
+1. Run virtual enviornment
+
+```sh
+ # From root directory
+ # on Mac
+source venv/bin/activate
+# on Windows
+venv\Scripts\activate
+```
+
+2. Run flask server and frontend at once
 
 ```sh
  # From root directory
