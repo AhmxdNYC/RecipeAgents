@@ -9,11 +9,11 @@ from .prompts import GENERATOR_PROMPT
 
 def generator_node(state, use_saved_data: bool = False):
     from graph import model  # avoid circular import
-
+    from graph.status_updates import update_server_during_generator
     # Directory to save/load generated content
     directory = os.environ.get("GENERATED_DATA_DIR", "../tests/meal_plan_save")
     filename = os.path.join(directory, "generated.json")
-    
+    update_server_during_generator()
     if not os.path.exists(directory):
         os.makedirs(directory)
     

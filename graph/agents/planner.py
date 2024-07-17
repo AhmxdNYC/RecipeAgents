@@ -8,9 +8,10 @@ load_dotenv()
 from .prompts import PLAN_PROMPT
 def plan_node(state, use_saved_data: bool = False):
     from graph import AgentState , model # avoid circular import
+    from graph.status_updates import update_server_during_planner
     directory = os.environ.get("PLANNER_DATA_DIR", "../tests/plan_save")
     filename = os.path.join(directory, "plan_data.json")
-    
+    update_server_during_planner()
     if not os.path.exists(directory):
         os.makedirs(directory)
     

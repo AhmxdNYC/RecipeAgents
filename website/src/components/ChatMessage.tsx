@@ -1,10 +1,11 @@
-type Message = {
-  id: number
-  text: string
-  sender: "user" | "bot"
+import React from "react"
+import Message from "../TS/types"
+
+type ChatMessageProps = {
+  message: Message
 }
 
-const ChatMessage = ({ message }: { message: Message }) => {
+const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const formattedText = message.text.replace(/\n/g, "<br />")
 
   return (
@@ -16,7 +17,7 @@ const ChatMessage = ({ message }: { message: Message }) => {
       <div
         className={`${
           message.sender === "user"
-            ? "bg-blue-500 text-white"
+            ? "bg-yellow-500 text-white mr-14"
             : "bg-gray-300 text-gray-700"
         } p-4 rounded-lg max-w-lg`}
         dangerouslySetInnerHTML={{ __html: formattedText }}

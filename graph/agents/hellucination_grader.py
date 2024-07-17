@@ -10,10 +10,10 @@ from .prompts import HALLUCINATION_GRADER_PROMPT
 
 def reviewer_node(state, use_saved_data: bool = False):
     from graph import model  # avoid circular import
-
+    from graph.status_updates import update_server_during_reviewer
     directory = os.environ.get("REVIEW_DATA_DIR", "../tests/review_save")
     filename = os.path.join(directory, "review_results.json")
-    
+    update_server_during_reviewer()
     if not os.path.exists(directory):
         os.makedirs(directory)
     
@@ -57,7 +57,8 @@ def reviewer_node(state, use_saved_data: bool = False):
             "grading_score": state['grading_score'] 
         }, file)
     print(hellucination_score)
-    
+    print("ASSESMENTS:", assessments)
+    print("----------")
     print("---REVIEWER---")
     
     return {

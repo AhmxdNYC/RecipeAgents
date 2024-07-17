@@ -178,6 +178,7 @@ npm run start:all
 ## Project Structure
 
 - Agents folder: contains implementation of all agents.
+
 - Tests folder: contains saved data run through test pre graph initialization.
 
 - Workflow folder: contains implementation of workflow.

@@ -5,7 +5,6 @@ from graph.agents import get_plan_node, get_research_plan_node, get_grader_node,
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
 from graph import AgentState  # avoid circular import
-
 def send_data_to_server(data):
     print("Sending data to server:", data) 
     response = requests.post('http://127.0.0.1:5000/api/processed', json=data)
@@ -69,16 +68,17 @@ def process_user_input(user_input):
         final_review="",
         hellucination_score=0,  
         search_number=0,
-        max_searches=1, # Adjust (1-2 recommendeded)
-        max_revisions=1, # Adjust (1-2 recommendeded)
+        max_searches=1, # Adjust (2-3 recommendeded)
+        max_revisions=1, # Adjust (2-3 recommendeded)
     )
 
-    # Start the Graph
+    # Stream the Graph
     for event in graph.stream(state, thread):
         print('------------------')
         # for key, value in event.items():
-        #     print(key, value)
-        # print('------------------')
+            # print(key, value)
+           
+
 
     # Retrieve the review data from the file
     directory = os.environ.get("REVIEW_DATA_DIR", "../tests/review_save")

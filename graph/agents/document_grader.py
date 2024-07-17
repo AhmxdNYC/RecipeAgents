@@ -9,10 +9,10 @@ from .prompts import GRADER_PROMPT
 
 def grader_node(state, use_saved_data: bool = False):
     from graph import model  # avoid circular import
-
+    from graph.status_updates import update_server_during_grader
     directory = os.environ.get("GENERATED_DATA_DIR", "../tests/relevant_docs_save")
     filename = os.path.join(directory, "relevant_content.json")
-    
+    update_server_during_grader()
     if not os.path.exists(directory):
         os.makedirs(directory)
     
@@ -59,3 +59,4 @@ def grader_node(state, use_saved_data: bool = False):
             "content": relevant_content,
             "grading_score": round(grading_score),
             }
+

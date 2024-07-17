@@ -1,6 +1,6 @@
-// export interface Recipe {
-//   title: string
-//   summary: string
-// }
-
-// export type SetRecipes = (recipes: Recipe[]) => void
+type Message = {
+  id: number
+  text: string
+  sender: "user" | "bot"
+}
+export default Message
