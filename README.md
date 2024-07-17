@@ -43,7 +43,7 @@ def plan_node(state, use_saved_data: bool = False):
 
 ### 2. Research Plan Agent
 
-**Task:** Uses the Tavily API to search for additional recipes or meal components based on the initial plan and user input.
+**Task:** Uses the Tavily API to search for recipes or meal components and infromation based on the initial plan and user input.
 
 ```python
 def research_plan_node(state, use_saved_data: bool = False):
