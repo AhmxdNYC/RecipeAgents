@@ -7,7 +7,7 @@ load_dotenv()
 
 from .prompts import GENERATOR_PROMPT
 
-def generator_node(state, use_saved_data: bool = False):
+def generator_node(state, use_saved_data: bool = True):
     from graph import model  # avoid circular import
     from graph.status_updates import update_server_during_generator
     # Directory to save/load generated content
@@ -22,7 +22,7 @@ def generator_node(state, use_saved_data: bool = False):
         print("From saved data!")
         with open(filename, 'r') as file:
             saved_data = json.load(file)
-            return {"generated": saved_data["generated"], "revision_number": state.get("revision_number", 1)}
+            return {"generated": saved_data["generated"], "revision_number": state.get("revision_number", 1) + 1}
         
     # Combine all content into a single string
     content = "\n\n".join(state['content'] or [])

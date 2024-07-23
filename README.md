@@ -1,6 +1,6 @@
-# RecipeAgents
+# Health Agents
 
-RecipeAgents is a personalized meal plan recommendation system that generates tailored meal plans based on user dietary preferences and available ingredients. This project utilizes the LangGraph framework for defining agent workflows and the Tavily API for fetching recipe data.
+Health Agents is a personalized meal plan recommendation system that generates tailored meal plans based on user dietary preferences and available ingredients. This project utilizes the LangGraph framework for defining agent workflows and the Tavily API for fetching recipe data.
 
 ## Table of Contents
 

@@ -7,7 +7,7 @@ load_dotenv()
 
 from .prompts import RESEARCH_PROMPT
 
-def research_plan_node(state, use_saved_data: bool = False):
+def research_plan_node(state, use_saved_data: bool = True):
     from graph import AgentState, model, Queries, tavily  # avoid circular import
     from graph.status_updates import update_server_during_research
     directory = os.environ.get("DOCUMENTS_DATA_DIR", "../tests/documents_save")
